@@ -1,24 +1,33 @@
 import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 
-const files = ["index.html", "src/main.tsx", "README.md", "docs/DEPLOYMENT.md"];
-describe("JusTICe institutional branding", () => {
-  it("does not visually uppercase institutional labels", () => {
-    const css = readFileSync("src/style.css", "utf8");
-    expect(css).toMatch(/\.brand-parent,\.eyebrow\s*\{\s*text-transform:\s*none\s*\}/);
+const source = readFileSync("src/main.tsx", "utf8");
+const html = readFileSync("index.html", "utf8");
+const css = readFileSync("src/style.css", "utf8");
+const readme = readFileSync("README.md", "utf8");
+
+describe("MAGIC JusTICe Lab brand identity", () => {
+  it("uses the official name in page title, description and README", () => {
+    expect(html).toContain("<title>MAGIC JusTICe Lab");
+    expect(html).toContain('content="MAGIC JusTICe Lab:');
+    expect(readme).toContain("# MAGIC JusTICe Lab");
   });
-  it("uses the same visible wordmark for every institutional reference", () => {
-    const markup = readFileSync("src/main.tsx", "utf8");
-    const visible = markup.match(/<span className="justice-mark">JusTICe<\/span>/g) ?? [];
-    expect(visible).toHaveLength(4);
-    const css = readFileSync("src/style.css", "utf8");
-    expect(css).toMatch(/\.justice-mark\s*\{[^}]*letter-spacing:normal!important;[^}]*text-transform:none!important;/);
+  it("uses the shared wordmark in header and footer", () => {
+    expect(source).toContain('aria-label="MAGIC JusTICe Lab"');
+    expect(source).toContain('MAGIC <span className="justice-mark">JusTICe</span> Lab');
+    expect((source.match(/MAGIC <span className="justice-mark">JusTICe<\/span> Lab/g) ?? []).length).toBe(2);
+    expect(source).toContain('className="footer-secondary"');
   });
-  for (const file of files) {
-    it(file + " uses the correct spelling in institutional references", () => {
-      const content = readFileSync(file, "utf8");
-      expect(content).not.toMatch(/\bJUSTICE\b|\bJustiCe\b|\bJusTice\b|\bJustICe\b/);
-      expect(content).toContain("JusTICe");
-    });
-  }
+  it("does not retain the previous lab name or incorrect capitalization", () => {
+    for (const text of [source, html, readme]) {
+      expect(text).not.toContain("MAGIC Justice Lab");
+      expect(text).not.toMatch(/\bJUSTICE\b|\bJustiCe\b|\bJusTice\b|\bJustICe\b/);
+    }
+  });
+  it("does not force uppercase or block formatting on the institutional wordmark", () => {
+    expect(css).toMatch(/\.justice-mark\s*\{[^}]*text-transform:none!important;/);
+    expect(css).toContain("footer .justice-mark{display:inline;margin:0}");
+    expect(css).toContain("footer .footer-secondary{display:block;margin-top:8px}");
+    expect(css).toContain(".brand{white-space:nowrap;");
+  });
 });
