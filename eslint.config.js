@@ -1,1 +1,2 @@
-export default [{ignores:["dist/**","node_modules/**"]},{files:["**/*.{js,ts,tsx}"],rules:{"no-debugger":"error"}}];
+import tseslint from "typescript-eslint";
+export default tseslint.config({ignores:["dist/**","node_modules/**"]},...tseslint.configs.recommended,{rules:{"@typescript-eslint/no-explicit-any":"error","no-debugger":"error"}});
