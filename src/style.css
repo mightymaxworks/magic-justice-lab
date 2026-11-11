@@ -87,3 +87,67 @@ nav a[aria-current="page"]{color:#d8b879;text-decoration:underline;text-underlin
 .lab-figure figcaption{font-size:13px;color:#e6d8c4;padding:16px;line-height:1.5}
 .asset-pending{color:#c4a5ae}
 @media(max-width:850px){.lab-image-grid{grid-template-columns:1fr}.lab-figure img{height:auto;max-height:360px}.hero-render:after{background:linear-gradient(90deg,#080e22f2,#080e22c9)}}
+
+.ourown-credit {
+  background: #121b31;
+  border-bottom: 1px solid #d8b87940;
+}
+
+.ourown-credit-inner {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 28px 8%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 28px;
+}
+
+.ourown-credit-heading {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.ourown-credit-heading svg {
+  width: 44px;
+  flex: none;
+  color: #e4c78f;
+}
+
+.ourown-credit h2, .lab-computing h2 {
+  font-size: clamp(20px, 2.1vw, 30px);
+  line-height: 1.2;
+  margin: 0 0 6px;
+}
+
+.ourown-credit p, .lab-computing p {
+  margin: 0;
+  color: #c6d0e8;
+  line-height: 1.55;
+}
+
+.ourown-credit-heading p {
+  font-size: 14px;
+}
+
+.ourown-credit a, .lab-computing a, .ourown-footer-credit {
+  color: #e4c78f;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.lab-computing {
+  border-left: 2px solid #d8b879;
+  padding: 18px 24px;
+  margin: 0 0 40px;
+  background: #121b31;
+}
+
+@media (max-width: 850px) {
+  .ourown-credit-inner {
+    grid-template-columns: 1fr;
+    padding: 24px 7%;
+    gap: 14px;
+  }
+}

@@ -24,7 +24,16 @@ const { chromium } = createRequire(import.meta.url)("playwright");
         }
         if (route.name === 'home') {
           assert.match(await page.locator('h1').innerText(), /Imagine Better Justice\.\s+Build It Together\./);
+          const credit = page.locator('.hero + .ourown-credit');
+          await credit.waitFor({state:'visible'});
+          assert.match(await credit.innerText(), /Computing powered by OurOwn[\s\S]*Metazone Digital/);
+          assert.equal(await credit.locator('a').getAttribute('href'), 'https://ourown.one/');
+        } else {
+          const credit = page.locator('.concept-gallery + .lab-computing');
+          await credit.waitFor({state:'visible'});
+          assert.match(await credit.innerText(), /OurOwn[\s\S]*Metazone Digital/);
         }
+        assert.equal(await page.locator('footer .ourown-footer-credit').getAttribute('href'), 'https://ourown.one/');
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
         console.log(viewport.width, route.name, route.count, 'decoded and visible');
       }
