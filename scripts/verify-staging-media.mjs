@@ -14,7 +14,8 @@ async function verifyShareMetadata() {
     const html = await response.text();
     assert.ok(html.includes(`<meta property="og:title" content="${title}"`));
     assert.ok(html.includes(`<link rel="canonical" href="${staging + path}"`));
-    assert.ok(html.includes(`<meta property="og:image" content="${staging}/images/hero-magic-lab.webp"`));
+    const image = path.startsWith("/projects") ? "/project-media/wpu-pickleball.webp" : "/images/hero-magic-lab.webp";
+    assert.ok(html.includes(`<meta property="og:image" content="${staging}${image}"`));
     assert.ok(html.includes('<meta name="twitter:card" content="summary_large_image"'));
   }
   const sitemap = await fetch(staging + "/sitemap.xml");
@@ -61,7 +62,11 @@ const { chromium } = createRequire(import.meta.url)("playwright");
         console.log(viewport.width, route.name, route.count, 'decoded and visible');
       }
       await page.goto(staging + "/projects");
+      await page.locator("main .wpu-image").scrollIntoViewIfNeeded();
+      await page.locator("main .wpu-image").evaluate(img => img.decode());
       await page.getByRole("link", { name: "Read the WPU case study" }).click();
+      await page.locator(".wpu-hero img").evaluate(img => img.decode());
+      assert.equal(await page.locator(".appeal-steps li").count(), 3);
       await page.getByRole("heading", { name: "AI Governance in Practice: The WPU Living Laboratory" }).waitFor();
       assert.equal(await page.getByRole("link", { name: "World Pickleball Union" }).getAttribute("href"), "https://worldpickleball.world/");
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));

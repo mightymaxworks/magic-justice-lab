@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./style.css";
 
-import { pageForPath, pages, type PageKey } from "./pages";
+import { pageForPath, pages, wpuImage, type PageKey } from "./pages";
 const navigation: { key: PageKey; label: string }[] = [
   { key: "purpose", label: "Our Purpose" },
   { key: "labs", label: "Innovation Labs" },
@@ -95,14 +95,27 @@ function LabComputing() {
     </section>
   );
 }
+function WpuImage({ eager = false }: { eager?: boolean }) {
+  return <img className="wpu-image" src={wpuImage.path} alt={wpuImage.alt} width={wpuImage.width} height={wpuImage.height} loading={eager ? "eager" : "lazy"} decoding="async"/>;
+}
 function WpuCaseStudy() {
   return <article className="page wpu-case-study">
     <a href="/projects" className="back-link">← Back to projects</a>
     <p className="eyebrow">Proposed project</p>
     <h1>{wpuProject.title}</h1>
     <p className="page-lead">Which decisions can an AI-assisted organisation delegate, and which should remain with people?</p>
+    <figure className="wpu-hero">
+      <WpuImage eager/>
+      <figcaption>Pickleball imagery from World Pickleball Union.</figcaption>
+    </figure>
     <p>The proposed <a href="https://worldpickleball.world/">World Pickleball Union</a> (WPU) Living Laboratory would explore that question through a practical case study in sports governance.</p>
-    <Card title="An eligibility appeal"><p>Imagine a player is ruled ineligible for a tournament and appeals. An AI assistant could organise the documents, find the relevant rules, and flag missing evidence. An authorised reviewer would check the record, decide the appeal, and explain the reasons to the player.</p></Card>
+    <Card title="An eligibility appeal">
+      <ol className="appeal-steps">
+        <li><strong>Player appeals</strong><span>A player challenges a tournament eligibility decision.</span></li>
+        <li><strong>AI prepares the record</strong><span>The assistant finds relevant rules, sorts documents and flags missing evidence.</span></li>
+        <li><strong>A reviewer decides</strong><span>An authorised person checks the record and explains the decision to the player.</span></li>
+      </ol>
+    </Card>
     <Card title="What the Lab would test"><p>Using simulated cases, the Lab would compare appeals handled with and without AI assistance. It would check whether the AI cites the correct rules, whether reviewers catch errors, and whether players receive a clear explanation and a meaningful route to challenge the decision.</p></Card>
     <Card title="What the project would produce"><p>Practical guidance on which tasks organisations can delegate to AI, who remains accountable for decisions, and what records make those decisions reviewable.</p></Card>
     <a href="/collaborate">See collaboration information</a>
@@ -110,10 +123,13 @@ function WpuCaseStudy() {
 }
 function FeaturedProject() {
   return <section className="wpu-feature" aria-labelledby="wpu-feature-heading">
-    <p className="eyebrow">Featured project · Proposed</p>
-    <h2 id="wpu-feature-heading">Who decides when AI helps?</h2>
-    <p>{wpuProject.description}</p>
-    <a href={pages.wpu.path}>Read the WPU case study</a>
+    <WpuImage/>
+    <div className="wpu-feature-copy">
+      <p className="eyebrow">Featured project · Proposed</p>
+      <h2 id="wpu-feature-heading">Who decides when AI helps?</h2>
+      <p>{wpuProject.description}</p>
+      <a href={pages.wpu.path}>Read the WPU case study</a>
+    </div>
   </section>;
 }
 function Home() {
@@ -130,7 +146,7 @@ function Page({ page }: { page: PageKey }) {
   return <div className="page"><a href="/" className="back-link">← Back to home</a><p className="eyebrow">MAGIC {wordmark} Lab</p><h1>{title}</h1>
     {page === "purpose" && <><p className="page-lead">Imagine Better Justice. Build It Together.</p><p>MAGIC {wordmark} Lab is an innovation and experimentation initiative within {wordmark} at Jigme Singye Wangchuck School of Law, Bhutan. It creates space to examine ideas at the intersection of law, governance, technology and human values.</p><div className="content-grid"><Card title="Human values first"><p>Innovation begins with the people it affects. Research and experimentation should be accessible, accountable and sensitive to context.</p></Card><Card title="Learn by experimenting"><p>Explore questions, test assumptions and share lessons through appropriately reviewed prototypes and collaborative inquiry.</p></Card><Card title="Responsible technology"><p>AI and digital tools should support sound governance and human judgement, not replace accountability or legal authority.</p></Card></div><p className="notice">MAGIC is an innovation laboratory, not a court, regulator or provider of legal advice.</p></>}
     {page === "labs" && <><ConceptGallery/><LabComputing/><p className="page-lead">Where research, governance and practical experimentation meet.</p><div className="content-grid"><Card title="AI & responsible innovation"><p>Investigate AI capabilities, limitations, evaluation and human oversight in justice-related settings.</p></Card><Card title="Legal technology"><p>Explore accessible information, document workflows and prototype tools with appropriate institutional supervision.</p></Card><Card title="Governance & ethics"><p>Study the rules, values, accountability structures and safeguards needed for trustworthy innovation.</p></Card><Card title="Learning & participation"><p>Create opportunities for students, researchers and collaborators to learn through demonstrations and discussion.</p></Card></div><p className="notice">Lab themes describe areas for exploration; they are not claims that operational legal services are available.</p></>}
-    {page === "projects" && <><p className="page-lead">A transparent view of approved work and experiments.</p><div className="project-status-key" aria-label="Project lifecycle"><span>Proposed</span><span>Concept</span><span>Prototype</span><span>Pilot</span><span>Operational</span></div>{publishedProjects.length ? <div className="content-grid">{publishedProjects.map(project => <Card key={project.slug} title={project.title}><p><strong>Status: {project.status}</strong></p><p>{project.description}</p>{project === wpuProject && <a href={pages.wpu.path}>Read the WPU case study</a>}</Card>)}</div> : <Card title="Project catalogue in preparation"><p>No project entries have yet received publication approval. Projects will appear here with a clearly defined lifecycle status and review process.</p></Card>}</>}
+    {page === "projects" && <><p className="page-lead">A transparent view of approved work and experiments.</p><div className="project-status-key" aria-label="Project lifecycle"><span>Proposed</span><span>Concept</span><span>Prototype</span><span>Pilot</span><span>Operational</span></div>{publishedProjects.length ? <div className="content-grid">{publishedProjects.map(project => <Card key={project.slug} title={project.title}>{project === wpuProject && <WpuImage/>}<p><strong>Status: {project.status}</strong></p><p>{project.description}</p>{project === wpuProject && <a href={pages.wpu.path}>Read the WPU case study</a>}</Card>)}</div> : <Card title="Project catalogue in preparation"><p>No project entries have yet received publication approval. Projects will appear here with a clearly defined lifecycle status and review process.</p></Card>}</>}
     {page === "challenges" && <><p className="page-lead">Meaningful problems can become collaborative research opportunities.</p><Card title="Challenge programme in preparation"><p>Potential themes include accessible legal information, multilingual communication and accountable AI governance. No challenge is currently open for public submissions.</p></Card></>}
     {page === "ideas" && <><p className="page-lead">A future space to contribute ideas for better justice.</p><Card title="Submissions not yet open"><p>MAGIC Ideas will launch only after consent, privacy, moderation, review and publication controls have been tested and approved. Do not send confidential or personal case information through this website.</p></Card></>}
     {page === "insights" && <><p className="page-lead">Research, learning and exchange.</p><Card title="Editorial content in preparation"><p>Approved events, workshop summaries, announcements and publications will appear here following institutional review.</p></Card></>}

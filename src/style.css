@@ -178,3 +178,64 @@ nav a[aria-current="page"]{color:#d8b879;text-decoration:underline;text-underlin
 .wpu-case-study .content-card {
   margin: 24px 0;
 }
+
+.wpu-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.wpu-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(18px, 4vw, 48px);
+}
+
+.wpu-hero {
+  margin: 28px 0;
+}
+
+.wpu-hero figcaption {
+  margin-top: 8px;
+  color: #c6d0e8;
+  font-size: 13px;
+}
+
+.appeal-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 0;
+  counter-reset: appeal-step;
+  list-style: none;
+}
+
+.appeal-steps li {
+  counter-increment: appeal-step;
+  border-top: 1px solid #d8b87966;
+  padding-top: 12px;
+}
+
+.appeal-steps li::before {
+  display: block;
+  margin-bottom: 8px;
+  color: #e4c78f;
+  content: counter(appeal-step, decimal-leading-zero);
+}
+
+.appeal-steps strong, .appeal-steps span {
+  display: block;
+}
+
+.appeal-steps span {
+  margin-top: 6px;
+  color: #c6d0e8;
+}
+
+@media (max-width: 700px) {
+  .wpu-feature, .appeal-steps {
+    grid-template-columns: 1fr;
+  }
+}

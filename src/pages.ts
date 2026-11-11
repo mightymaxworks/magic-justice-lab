@@ -1,3 +1,10 @@
+export const wpuImage = {
+  path: "/project-media/wpu-pickleball.webp",
+  alt: "A pickleball player reaches for the ball on an outdoor court.",
+  width: 828,
+  height: 414,
+} as const;
+
 export const pages = {
   home: { path: "/", title: "MAGIC JusTICe Lab | Imagine Better Justice", description: "MAGIC JusTICe Lab: exploring AI, law and responsible innovation at Jigme Singye Wangchuck School of Law in Bhutan." },
   purpose: { path: "/our-purpose", title: "Our Purpose | MAGIC JusTICe Lab", description: "Explore the Lab’s approach to human-centred experimentation in law, governance and responsible technology." },

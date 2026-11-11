@@ -1,4 +1,4 @@
-import { pageForPath, pages } from "../src/pages";
+import { pageForPath, pages, wpuImage } from "../src/pages";
 
 export interface Env { ASSETS: Fetcher; LAB_ASSETS: R2Bucket }
 
@@ -54,7 +54,10 @@ export default {
 
     const page = pages[pageKey];
     const canonical = url.origin + page.path;
-    const image = url.origin + "/images/hero-magic-lab.webp";
+    const preview = pageKey === "wpu" || pageKey === "projects"
+      ? wpuImage
+      : { path: "/images/hero-magic-lab.webp", width: 1500, height: 844, alt: "Artist impression of the proposed MAGIC JusTICe Lab interior in Bhutan." };
+    const image = url.origin + preview.path;
     const html = await env.ASSETS.fetch(new Request(new URL("/", url), request));
     return new HTMLRewriter()
       .on("title", { element: el => el.setInnerContent(page.title) })
@@ -64,6 +67,9 @@ export default {
       .on('meta[property="og:title"]', { element: el => el.setAttribute("content", page.title) })
       .on('meta[property="og:url"]', { element: el => el.setAttribute("content", canonical) })
       .on('meta[property="og:image"]', { element: el => el.setAttribute("content", image) })
+      .on('meta[property="og:image:width"]', { element: el => el.setAttribute("content", String(preview.width)) })
+      .on('meta[property="og:image:height"]', { element: el => el.setAttribute("content", String(preview.height)) })
+      .on('meta[property="og:image:alt"]', { element: el => el.setAttribute("content", preview.alt) })
       .transform(html);
   },
 } satisfies ExportedHandler<Env>;
