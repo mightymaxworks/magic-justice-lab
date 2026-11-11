@@ -8,21 +8,30 @@ const ideaTypes = [
 
 export function IdeasForm() {
   const [type, setType] = useState<(typeof ideaTypes)[number]["value"]>("problem");
-  const [complete, setComplete] = useState(false);
+  const [step, setStep] = useState<"details" | "verify" | "complete">("details");
   const activeType = ideaTypes.find(option => option.value === type) ?? ideaTypes[0];
   const source = new URLSearchParams(window.location.search).get("from");
   const fromWpu = source === "wpu";
 
   function preview(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setComplete(true);
+    setStep("verify");
   }
 
-  if (complete) {
+  if (step === "verify") {
+    return <section className="idea-form" aria-labelledby="idea-verify">
+      <h2 id="idea-verify" tabIndex={-1} ref={element => element?.focus()}>Verify your email</h2>
+      <p>In live intake, you’ll receive a verification link. Once you confirm, the Lab can review your submission and contact you about it.</p>
+      <p>This practice version sends no email.</p>
+      <button type="button" onClick={() => setStep("complete")}>Simulate email verification</button>
+    </section>;
+  }
+
+  if (step === "complete") {
     return <section className="idea-form" aria-labelledby="idea-confirmation">
       <h2 id="idea-confirmation" tabIndex={-1} ref={element => element?.focus()}>Practice submission complete</h2>
       <p>Your entries stayed in this browser tab. The Lab received nothing.</p>
-      <button type="button" onClick={() => setComplete(false)}>Try another example</button>
+      <button type="button" onClick={() => setStep("details")}>Try another example</button>
     </section>;
   }
 
@@ -41,8 +50,15 @@ export function IdeasForm() {
       <label>Who would this help? <input required maxLength={300}/></label>
       {type === "project" && <label>What have you tried, and what help do you need? <textarea required rows={3} maxLength={1000}/></label>}
       <label>Supporting link (optional) <input type="url" placeholder="https://example.org"/></label>
-      <label>Example email <input type="email" value="contributor@example.org" readOnly/></label>
-      <button type="submit">Preview confirmation</button>
+      <fieldset className="idea-contact">
+        <legend>About you</legend>
+        <p id="idea-contact-note">Use fictional details in this preview. In live intake, the Lab would use these details to attribute your submission and follow up privately.</p>
+        <label>Full name <input required maxLength={120} aria-describedby="idea-contact-note"/></label>
+        <label>Email address <input type="email" required maxLength={254} aria-describedby="idea-contact-note"/></label>
+        <label>Your role or connection to the idea (optional) <input maxLength={140} placeholder="For example, student, researcher or project lead"/></label>
+        <label>Organisation (optional) <input maxLength={140}/></label>
+      </fieldset>
+      <button type="submit">Continue to email verification</button>
     </form>
   );
 }

@@ -399,3 +399,17 @@ nav a[aria-current="page"]{color:#d8b879;text-decoration:underline;text-underlin
 .idea-form button {
   justify-self: start;
 }
+
+.idea-form .idea-contact {
+  gap: 14px;
+  padding-top: 12px;
+}
+
+.idea-contact p {
+  margin: 0;
+  color: #c6d0e8;
+}
+
+.idea-contact label {
+  font-weight: 700;
+}
