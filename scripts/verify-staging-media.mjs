@@ -78,6 +78,20 @@ const { chromium } = createRequire(import.meta.url)("playwright");
       await page.getByRole("heading", { name: "AI Governance in Practice: The WPU Living Laboratory" }).waitFor();
       assert.equal(await page.getByRole("link", { name: "World Pickleball Union" }).getAttribute("href"), "https://worldpickleball.world/");
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+      await page.getByRole("link", { name: "Explore MAGIC Ideas" }).click();
+      await page.getByRole("heading", { name: "MAGIC Ideas", exact: true }).waitFor();
+      await page.getByRole("link", { name: "The WPU Living Laboratory" }).waitFor();
+      const form = page.getByRole("form", { name: "Practice an idea submission" });
+      await form.getByLabel("I have a project underway").check();
+      await form.getByLabel("Short title").fill("Fictional example");
+      await form.getByLabel("What are you working on, and what would you like to improve?").fill("An example for testing the form.");
+      await form.getByLabel("Who would this help?").fill("Example participants");
+      await form.getByLabel("What have you tried, and what help do you need?").fill("Example review");
+      await form.getByRole("button", { name: "Preview confirmation" }).click();
+      await page.getByRole("heading", { name: "Practice submission complete" }).waitFor();
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+      await page.goto(staging + "/projects");
+      assert.equal(await page.getByRole("link", { name: "Explore MAGIC Ideas" }).getAttribute("href"), "/magic-ideas");
       await page.close();
     }
   } finally {

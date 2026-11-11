@@ -13,7 +13,9 @@ describe("M3.1 public site release guards", () => {
   it("keeps MAGIC Ideas closed until safeguards are implemented", () => {
     expect(app).toContain("Submissions not yet open");
     expect(app).toContain("No personal information is being collected");
-    expect(app).not.toMatch(/<form\b|<input\b|<textarea\b/);
+    const preview = readFileSync("src/IdeasForm.tsx", "utf8");
+    expect(preview).toContain("event.preventDefault()");
+    expect(preview).not.toMatch(/fetch\(|localStorage|sessionStorage/);
   });
   it("supports accessible navigation and responsive layouts", () => {
     expect(app).toContain('aria-label="Main navigation"');

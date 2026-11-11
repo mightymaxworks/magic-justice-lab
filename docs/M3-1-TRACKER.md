@@ -94,3 +94,17 @@ This is a code-complete first slice, **not** a verified live release.
 - Approved for publication as a proposed project. Listed first on Projects and featured below the homepage OurOwn credit.
 - Dedicated path: `/projects/wpu-living-laboratory`. Includes search and share metadata and a link to the World Pickleball Union site.
 - Public page uses the simulated eligibility appeal and excludes draft names, contact placeholders and unconfirmed technical roles.
+
+## MAGIC Ideas intake
+
+| Task | Status | Completion check |
+| --- | --- | --- |
+| MI-01 Entry points | Implemented | Projects and Collaborate link to MAGIC Ideas. The WPU case study carries its context into the form. |
+| MI-02 Form and confirmation | Implemented as browser-only practice | Three starting points, conditional project question, validation and a local confirmation. Verify on desktop and mobile. |
+| MI-03 Assign review ownership | Open | Confirm the lead reviewer, backup reviewer and institutional reply address. |
+| MI-04 Private queue and reviewer access | Open | Provision private storage and authenticated review access. Support received, follow-up, shortlisted and closed statuses. |
+| MI-05 Live submission and receipt | Open | Add server-side validation, abuse controls, a submission reference, error recovery and a clear receipt. |
+| MI-06 Privacy and launch review | Open | Agree who can see submissions, retention and deletion, and the public privacy wording. Test with fictional data before enabling real intake. |
+| MI-07 Challenge intake | Waiting for a challenge | Add a link that identifies the approved challenge when one opens. |
+
+Preview fields have no submitted names, and the preview makes no network request or storage write. Use fictional data during practice. Public intake opens after the live submission and review path have been tested and ownership and privacy decisions are confirmed.

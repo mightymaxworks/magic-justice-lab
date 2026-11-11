@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { createRoot } from "react-dom/client";
 import "./style.css";
+import { IdeasForm } from "./IdeasForm";
 
 import { pageForPath, pages, wpuImage, type PageKey } from "./pages";
 const navigation: { key: PageKey; label: string }[] = [
@@ -140,7 +141,10 @@ function WpuCaseStudy() {
     </Card>
     <Card title="What the Lab would test"><p>Using simulated cases, the Lab would compare appeals handled with and without AI assistance. It would check whether the AI cites the correct rules, whether reviewers catch errors, and whether players receive a clear explanation and a meaningful route to challenge the decision.</p></Card>
     <Card title="What the project would produce"><p>Practical guidance on which tasks organisations can delegate to AI, who remains accountable for decisions, and what records make those decisions reviewable.</p></Card>
-    <a href="/collaborate">See collaboration information</a>
+    <section className="idea-invitation" aria-labelledby="wpu-idea-heading">
+      <h2 id="wpu-idea-heading">Have a governance question the Lab could explore?</h2>
+      <a className="idea-cta" href="/magic-ideas?from=wpu">Explore MAGIC Ideas</a>
+    </section>
   </article>;
 }
 function FeaturedProject() {
@@ -168,11 +172,18 @@ function Page({ page }: { page: PageKey }) {
   return <div className="page"><a href="/" className="back-link">← Back to home</a><p className="eyebrow">MAGIC {wordmark} Lab</p><h1>{title}</h1>
     {page === "purpose" && <><p className="page-lead">Imagine Better Justice. Build It Together.</p><p>MAGIC {wordmark} Lab is an innovation and experimentation initiative within {wordmark} at Jigme Singye Wangchuck School of Law, Bhutan. It creates space to examine ideas at the intersection of law, governance, technology and human values.</p><div className="content-grid"><Card title="Human values first"><p>Innovation begins with the people it affects. Research and experimentation should be accessible, accountable and sensitive to context.</p></Card><Card title="Learn by experimenting"><p>Explore questions, test assumptions and share lessons through appropriately reviewed prototypes and collaborative inquiry.</p></Card><Card title="Responsible technology"><p>AI and digital tools should support sound governance and human judgement, not replace accountability or legal authority.</p></Card></div><p className="notice">MAGIC is an innovation laboratory, not a court, regulator or provider of legal advice.</p></>}
     {page === "labs" && <><ConceptGallery/><LabComputing/><p className="page-lead">Where research, governance and practical experimentation meet.</p><div className="content-grid"><Card title="AI & responsible innovation"><p>Investigate AI capabilities, limitations, evaluation and human oversight in justice-related settings.</p></Card><Card title="Legal technology"><p>Explore accessible information, document workflows and prototype tools with appropriate institutional supervision.</p></Card><Card title="Governance & ethics"><p>Study the rules, values, accountability structures and safeguards needed for trustworthy innovation.</p></Card><Card title="Learning & participation"><p>Create opportunities for students, researchers and collaborators to learn through demonstrations and discussion.</p></Card></div><p className="notice">Lab themes describe areas for exploration; they are not claims that operational legal services are available.</p></>}
-    {page === "projects" && <><p className="page-lead">A transparent view of approved work and experiments.</p><div className="project-status-key" aria-label="Project lifecycle"><span>Proposed</span><span>Concept</span><span>Prototype</span><span>Pilot</span><span>Operational</span></div>{publishedProjects.length ? <div className="project-list">{publishedProjects.map(project => <ProjectCard key={project.slug} project={project}/>)}</div> : <Card title="Project catalogue in preparation"><p>No project entries have yet received publication approval. Projects will appear here with a clearly defined lifecycle status and review process.</p></Card>}</>}
+    {page === "projects" && <><div className="projects-intro">
+      <p className="page-lead">A transparent view of approved work and experiments.</p>
+      <a className="idea-cta" href="/magic-ideas">Explore MAGIC Ideas</a>
+    </div><div className="project-status-key" aria-label="Project lifecycle"><span>Proposed</span><span>Concept</span><span>Prototype</span><span>Pilot</span><span>Operational</span></div>{publishedProjects.length ? <div className="project-list">{publishedProjects.map(project => <ProjectCard key={project.slug} project={project}/>)}</div> : <Card title="Project catalogue in preparation"><p>No project entries have yet received publication approval. Projects will appear here with a clearly defined lifecycle status and review process.</p></Card>}</>}
     {page === "challenges" && <><p className="page-lead">Meaningful problems can become collaborative research opportunities.</p><Card title="Challenge programme in preparation"><p>Potential themes include accessible legal information, multilingual communication and accountable AI governance. No challenge is currently open for public submissions.</p></Card></>}
-    {page === "ideas" && <><p className="page-lead">A future space to contribute ideas for better justice.</p><Card title="Submissions not yet open"><p>MAGIC Ideas will launch only after consent, privacy, moderation, review and publication controls have been tested and approved. Do not send confidential or personal case information through this website.</p></Card></>}
+    {page === "ideas" && <>
+      <p className="page-lead">Bring a problem, an idea, or a project that could help improve justice.</p>
+      <p className="notice"><strong>Submissions not yet open.</strong> Try the form with fictional details. No personal information is being collected.</p>
+      <IdeasForm/>
+    </>}
     {page === "insights" && <><p className="page-lead">Research, learning and exchange.</p><Card title="Editorial content in preparation"><p>Approved events, workshop summaries, announcements and publications will appear here following institutional review.</p></Card></>}
-    {page === "collaborate" && <><p className="page-lead">Innovation works best when expertise and perspectives meet.</p><Card title="Collaboration pathways"><p>Future opportunities may include student participation, academic research, technical prototyping and institutional partnerships. A verified contact channel will be published after approval.</p></Card></>}
+    {page === "collaborate" && <><p className="page-lead">Innovation works best when expertise and perspectives meet.</p><Card title="Collaboration pathways"><p>Future opportunities may include student participation, academic research, technical prototyping and institutional partnerships. A verified contact channel will be published after approval.</p></Card><p>Have a specific problem or project in mind? <a href="/magic-ideas">Explore MAGIC Ideas</a>.</p></>}
   </div>;
 }
 function App() {

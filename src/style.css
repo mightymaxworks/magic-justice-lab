@@ -311,3 +311,91 @@ nav a[aria-current="page"]{color:#d8b879;text-decoration:underline;text-underlin
     min-height: 0;
   }
 }
+
+.projects-intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.idea-cta, .idea-form button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 6px;
+  background: #d8b879;
+  color: #11192e;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.idea-cta:hover, .idea-form button:hover {
+  background: #f1d395;
+}
+
+.idea-form button:focus-visible, .idea-form input:focus-visible, .idea-form textarea:focus-visible {
+  outline: 3px solid #e9c789;
+  outline-offset: 3px;
+}
+
+.idea-invitation, .idea-form {
+  margin: 28px 0;
+  padding: clamp(18px, 4vw, 32px);
+  border: 1px solid #d8b87955;
+  border-radius: 14px;
+  background: #121c39;
+}
+
+.idea-form {
+  display: grid;
+  gap: 18px;
+  max-width: 760px;
+}
+
+.idea-form fieldset {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.idea-form legend, .idea-form > label {
+  font-weight: 700;
+}
+
+.idea-form label {
+  display: grid;
+  gap: 6px;
+}
+
+.idea-form label.idea-choice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+}
+
+.idea-form input:not([type="radio"]), .idea-form textarea {
+  width: 100%;
+  border: 1px solid #9ba9ce;
+  border-radius: 6px;
+  background: #080e22;
+  color: #edf1ff;
+  padding: 10px;
+  font: inherit;
+}
+
+.idea-form input::placeholder {
+  color: #9ba9ce;
+}
+
+.idea-form button {
+  justify-self: start;
+}
