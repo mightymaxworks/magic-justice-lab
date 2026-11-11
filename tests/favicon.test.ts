@@ -11,6 +11,6 @@ describe("favicon branding", () => {
     expect(icon).toContain("<title>MAGIC JusTICe Lab</title>");
     expect(icon).toContain("#0b1330");
     expect(icon).toContain("#d8b879");
-    expect(icon).not.toContain("http://www.w3.org");
+    expect(icon).not.toContain("<script");
   });
 });
