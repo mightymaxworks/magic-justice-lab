@@ -27,3 +27,15 @@ Updated: 2026-11-11. CI run #46 passed for commit 7bb702ac; subsequent favicon c
 - M4 private submissions and M5 approvals are separate future releases.
 - Public hosting and durable storage stay in managed cloud, per OurOwn ADR-001; contributed nodes only execute authorised compute.
 - This file is a task register, not a claim that the release is approved or production-ready.
+
+## M3.2 — Bhutan-inspired visual refresh (2026-11-11)
+
+- [x] Translate artist-impression visual language into lightweight SVG/CSS Himalayan silhouette, gold-violet highlights, and warm editorial presentation (commits c18611b3 and 4532fb3a).
+- [x] Add homepage narrative and direct link to Innovation Challenges.
+- [ ] Confirm CI success for latest commits and Cloudflare staging deployment.
+- [ ] Browser review: desktop, mobile, typography, contrast, and official JusTICe spelling.
+- [ ] Obtain approval to publish artist impressions as **conceptual renderings**, with explicit non-photographic captions.
+- [ ] Upload approved optimized WebP/AVIF imagery through a binary-capable Git workflow; the current GitHub text-file tool cannot safely publish the supplied PNGs.
+- [ ] Populate real project and event content following institutional review.
+
+Do not label concept renders as photographs of a completed lab, and do not publish an unverified node count or service status shown in the concepts.
