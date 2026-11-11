@@ -11,3 +11,23 @@
 .brand{white-space:nowrap;letter-spacing:normal}
 .brand-parent{white-space:normal}
 footer .justice-mark{display:inline;margin:0}
+
+/* M3.1: routed pages and accessible navigation */
+.skip-link{position:absolute;left:12px;top:-80px;z-index:20;background:#d8b879;color:#080e22;padding:12px 18px;border-radius:6px}.skip-link:focus{top:12px}
+.menu-toggle{display:none;background:transparent;border:1px solid #d8b879;color:#edf1ff;border-radius:6px;padding:10px 14px;font:inherit;cursor:pointer}
+nav a[aria-current="page"]{color:#d8b879;text-decoration:underline;text-underline-offset:6px}
+.panel-link{text-decoration:none;display:block;transition:border-color .15s ease,transform .15s ease}
+.panel-link:hover,.panel-link:focus-visible{border-color:#d8b879;transform:translateY(-2px)}
+.page{max-width:1200px;min-height:65vh;margin:0 auto;padding:80px 6% 110px}
+.page h1{font-size:clamp(40px,6vw,76px);margin:20px 0 28px}
+.page>p:not(.eyebrow){color:#c6d0e8;font-size:18px;line-height:1.8;max-width:850px}
+.page-lead{font-size:clamp(21px,2.5vw,29px)!important;color:#e6eafb!important;line-height:1.5!important}
+.back-link{color:#d8b879;text-decoration:none;font-size:14px}
+.content-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:38px 0}
+.content-card{background:#121c39;border:1px solid #ffffff20;border-radius:14px;padding:30px}
+.content-card h2{font-size:24px;margin:0 0 16px}
+.content-card p{color:#c6d0e8;line-height:1.7;margin:0}
+.page>.notice{border-left:3px solid #d8b879;padding:12px 18px;background:#121c39;margin-top:28px}
+@media(max-width:1050px){header{flex-wrap:wrap}.menu-toggle{display:block;margin-left:auto}nav{display:none;width:100%;flex-direction:column;gap:0;padding-top:12px}nav.nav-open{display:flex}nav a{padding:12px 0;font-size:15px}.content-grid{grid-template-columns:1fr}}
+@media(max-width:600px){.brand{font-size:19px}.hero{padding:72px 7%}.page{padding:55px 7% 80px}.panel{padding:25px;min-height:unset}.sections{gap:12px}}
+@media(prefers-reduced-motion:reduce){.panel-link{transition:none}}
