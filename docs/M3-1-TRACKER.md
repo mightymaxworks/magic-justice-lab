@@ -52,3 +52,14 @@ Do not label concept renders as photographs of a completed lab, and do not publi
 - [ ] Add editorial workflow and real project metadata (owner, review date, safeguards, outcomes).
 
 This is a code-complete first slice, **not** a verified live release.
+
+## M3.2 image integration — current state
+
+- [x] Original supplied PNGs retained in the conversation working environment; do not modify originals.
+- [x] Four optimized WebP files prepared under `public/images/` in a local ZIP: `hero-magic-lab.webp`, `gallery-collaboration.webp`, `gallery-heritage.webp`, `gallery-technology.webp`.
+- [x] Website references these four paths; includes missing-image fallback, captions and responsive image layout.
+- [x] Removed generic SVG gallery and mountain art.
+- [ ] **BLOCKER: binary WebP files not yet committed to GitHub or published to Cloudflare.** GitHub text-file actions cannot upload the local binary images. Upload all four to the repository's `public/images/` folder using a binary-capable workflow. The staging deploy will then copy them into the public assets.
+- [ ] Confirm CI and staging deployment after binary upload; inspect image URLs and mobile/desktop presentation.
+
+**Do not mark image publication complete until all four URLs return real image content.**
