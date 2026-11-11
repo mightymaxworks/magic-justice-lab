@@ -88,3 +88,9 @@ This is a code-complete first slice, **not** a verified live release.
 
 - [x] Add homepage, Innovation Labs and footer attribution for OurOwn as the Lab’s computing platform and a proprietary platform of Metazone Digital.
 - [x] Check the placement, link and layout at desktop and mobile widths in the staging browser workflow.
+
+## WPU Living Laboratory
+
+- Approved for publication as a proposed project. Listed first on Projects and featured below the homepage OurOwn credit.
+- Dedicated path: `/projects/wpu-living-laboratory`. Includes search and share metadata and a link to the World Pickleball Union site.
+- Public page uses the simulated eligibility appeal and excludes draft names, contact placeholders and unconfirmed technical roles.

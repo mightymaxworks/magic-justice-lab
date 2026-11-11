@@ -4,19 +4,19 @@ compatibility_date = "2026-10-01"
 [assets]
 directory = "./dist"
 binding = "ASSETS"
-run_worker_first = ["/", "/api/*", "/images/*", "/robots.txt", "/sitemap.xml", "/our-purpose", "/innovation-labs", "/projects", "/innovation-challenges", "/magic-ideas", "/insights-and-events", "/collaborate"]
+run_worker_first = ["/", "/api/*", "/images/*", "/robots.txt", "/sitemap.xml", "/our-purpose", "/innovation-labs", "/projects", "/projects/wpu-living-laboratory", "/innovation-challenges", "/magic-ideas", "/insights-and-events", "/collaborate"]
 [env.staging]
 name = "magic-justice-lab"
 [env.staging.assets]
 directory = "./dist"
 binding = "ASSETS"
-run_worker_first = ["/", "/api/*", "/images/*", "/robots.txt", "/sitemap.xml", "/our-purpose", "/innovation-labs", "/projects", "/innovation-challenges", "/magic-ideas", "/insights-and-events", "/collaborate"]
+run_worker_first = ["/", "/api/*", "/images/*", "/robots.txt", "/sitemap.xml", "/our-purpose", "/innovation-labs", "/projects", "/projects/wpu-living-laboratory", "/innovation-challenges", "/magic-ideas", "/insights-and-events", "/collaborate"]
 [env.production]
 name = "magic-justice-lab-production"
 [env.production.assets]
 directory = "./dist"
 binding = "ASSETS"
-run_worker_first = ["/", "/api/*", "/images/*", "/robots.txt", "/sitemap.xml", "/our-purpose", "/innovation-labs", "/projects", "/innovation-challenges", "/magic-ideas", "/insights-and-events", "/collaborate"]
+run_worker_first = ["/", "/api/*", "/images/*", "/robots.txt", "/sitemap.xml", "/our-purpose", "/innovation-labs", "/projects", "/projects/wpu-living-laboratory", "/innovation-challenges", "/magic-ideas", "/insights-and-events", "/collaborate"]
 
 # Publicly approved image delivery; uploads are not exposed by this Worker.
 [[env.staging.r2_buckets]]

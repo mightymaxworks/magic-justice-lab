@@ -40,7 +40,7 @@ export default {
       });
     }
     if (url.pathname === "/sitemap.xml") {
-      const links = [pages.home, pages.purpose, pages.labs].map(page =>
+      const links = [pages.home, pages.purpose, pages.labs, pages.projects, pages.wpu].map(page =>
         `<url><loc>${url.origin}${page.path}</loc></url>`
       );
       return new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${links.join("")}</urlset>`, {

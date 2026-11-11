@@ -7,6 +7,7 @@ async function verifyShareMetadata() {
   for (const [path, title] of [
     ["/", "MAGIC JusTICe Lab | Imagine Better Justice"],
     ["/innovation-labs", "Innovation Labs | MAGIC JusTICe Lab"],
+    ["/projects/wpu-living-laboratory", "The WPU Living Laboratory | MAGIC JusTICe Lab"],
   ]) {
     const response = await fetch(staging + path, { headers: { "User-Agent": "Twitterbot/1.0" } });
     assert.equal(response.status, 200);
@@ -45,6 +46,7 @@ const { chromium } = createRequire(import.meta.url)("playwright");
         }
         if (route.name === 'home') {
           assert.match(await page.locator('h1').innerText(), /Imagine Better Justice\.\s+Build It Together\./);
+          assert.equal(await page.locator('.ourown-credit + .wpu-feature a').getAttribute('href'), '/projects/wpu-living-laboratory');
           const credit = page.locator('.hero + .ourown-credit');
           await credit.waitFor({state:'visible'});
           assert.match(await credit.innerText(), /Computing powered by OurOwn[\s\S]*Metazone Digital/);
@@ -58,6 +60,11 @@ const { chromium } = createRequire(import.meta.url)("playwright");
         assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
         console.log(viewport.width, route.name, route.count, 'decoded and visible');
       }
+      await page.goto(staging + "/projects");
+      await page.getByRole("link", { name: "Read the WPU case study" }).click();
+      await page.getByRole("heading", { name: "AI Governance in Practice: The WPU Living Laboratory" }).waitFor();
+      assert.equal(await page.getByRole("link", { name: "World Pickleball Union" }).getAttribute("href"), "https://worldpickleball.world/");
+      assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
       await page.close();
     }
   } finally {

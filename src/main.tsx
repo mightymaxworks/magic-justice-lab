@@ -28,9 +28,17 @@ const panels: { key: PageKey; label: string; text: string }[] = [
   { key: "insights", label: "Insights & Events", text: "Institutionally reviewed updates, workshops and publications." },
   { key: "collaborate", label: "Collaborate", text: "Learn how partners and participants can help build better justice." },
 ];
-type ProjectStatus = "Concept" | "Prototype" | "Pilot" | "Operational";
+type ProjectStatus = "Proposed" | "Concept" | "Prototype" | "Pilot" | "Operational";
 type ProjectEntry = { slug: string; title: string; status: ProjectStatus; description: string; approved: boolean };
+const wpuProject: ProjectEntry = {
+  slug: "wpu-living-laboratory",
+  title: "AI Governance in Practice: The WPU Living Laboratory",
+  status: "Proposed",
+  description: "A proposed case study exploring which decisions an AI-assisted sports organisation can delegate and which should remain with people.",
+  approved: true,
+};
 const projectEntries: ProjectEntry[] = [
+  wpuProject,
   { slug: "accessible-information", title: "Accessible legal information", status: "Concept", description: "An illustrative research direction exploring how people might understand legal information more easily.", approved: false },
   { slug: "multilingual-access", title: "Multilingual access", status: "Concept", description: "An illustrative research direction on communication across languages in justice-related settings.", approved: false },
   { slug: "responsible-ai", title: "Responsible AI governance", status: "Concept", description: "An illustrative research direction on evaluation, human oversight and accountability.", approved: false },
@@ -87,12 +95,34 @@ function LabComputing() {
     </section>
   );
 }
+function WpuCaseStudy() {
+  return <article className="page wpu-case-study">
+    <a href="/projects" className="back-link">← Back to projects</a>
+    <p className="eyebrow">Proposed project</p>
+    <h1>{wpuProject.title}</h1>
+    <p className="page-lead">Which decisions can an AI-assisted organisation delegate, and which should remain with people?</p>
+    <p>The proposed <a href="https://worldpickleball.world/">World Pickleball Union</a> (WPU) Living Laboratory would explore that question through a practical case study in sports governance.</p>
+    <Card title="An eligibility appeal"><p>Imagine a player is ruled ineligible for a tournament and appeals. An AI assistant could organise the documents, find the relevant rules, and flag missing evidence. An authorised reviewer would check the record, decide the appeal, and explain the reasons to the player.</p></Card>
+    <Card title="What the Lab would test"><p>Using simulated cases, the Lab would compare appeals handled with and without AI assistance. It would check whether the AI cites the correct rules, whether reviewers catch errors, and whether players receive a clear explanation and a meaningful route to challenge the decision.</p></Card>
+    <Card title="What the project would produce"><p>Practical guidance on which tasks organisations can delegate to AI, who remains accountable for decisions, and what records make those decisions reviewable.</p></Card>
+    <a href="/collaborate">See collaboration information</a>
+  </article>;
+}
+function FeaturedProject() {
+  return <section className="wpu-feature" aria-labelledby="wpu-feature-heading">
+    <p className="eyebrow">Featured project · Proposed</p>
+    <h2 id="wpu-feature-heading">Who decides when AI helps?</h2>
+    <p>{wpuProject.description}</p>
+    <a href={pages.wpu.path}>Read the WPU case study</a>
+  </section>;
+}
 function Home() {
-  return <><section className="hero"><div className="orb" aria-hidden="true"/><div className="hero-render" aria-hidden="true"><img src="/images/hero-magic-lab.webp" alt="" decoding="async" fetchPriority="high" onError={e=>{e.currentTarget.style.display="none";}}/></div><p className="eyebrow">{wordmark} · Jigme Singye Wangchuck School of Law · Bhutan</p><h1>Imagine Better Justice.<br/><em>Build It Together.</em></h1><p className="intro">MAGIC JusTICe Lab is the innovation and experimentation arm of {wordmark}, bringing law, artificial intelligence, governance, technology and human values together.</p><div className="hero-actions"><a className="cta" href="/our-purpose">Explore the Lab →</a><a className="secondary-cta" href="/innovation-challenges">Explore innovation challenges</a></div><div className="hero-signature" aria-label="Our approach"><span>Rooted in Bhutan</span><span>Human values first</span><span>Built for tomorrow</span></div></section><OurOwnCredit/><section className="studio-intro" aria-labelledby="studio-title"><p className="eyebrow">A place to imagine, question and build</p><h2 id="studio-title">Bhutanese heritage. Future-facing ideas.</h2><p>Inspired by the proposed MAGIC Lab interiors: Himalayan silhouettes, warm golden light, flowing forms and a spirit of experimentation. These are design inspirations, not photographs of a completed facility.</p><div className="studio-pillars"><span>01 / Governance</span><span>02 / Technology</span><span>03 / Human values</span></div></section><section className="sections" aria-label="Explore MAGIC JusTICe Lab">{panels.map((item, i) => <a className="panel panel-link" href={pages[item.key].path} key={item.key}><span className="index">{String(i + 1).padStart(2, "0")}</span><h2>{item.label}</h2><p>{item.text}</p>{item.key === "ideas" && <p className="notice">Idea submission is not yet enabled. No personal information is being collected.</p>}</a>)}</section></>;
+  return <><section className="hero"><div className="orb" aria-hidden="true"/><div className="hero-render" aria-hidden="true"><img src="/images/hero-magic-lab.webp" alt="" decoding="async" fetchPriority="high" onError={e=>{e.currentTarget.style.display="none";}}/></div><p className="eyebrow">{wordmark} · Jigme Singye Wangchuck School of Law · Bhutan</p><h1>Imagine Better Justice.<br/><em>Build It Together.</em></h1><p className="intro">MAGIC JusTICe Lab is the innovation and experimentation arm of {wordmark}, bringing law, artificial intelligence, governance, technology and human values together.</p><div className="hero-actions"><a className="cta" href="/our-purpose">Explore the Lab →</a><a className="secondary-cta" href="/innovation-challenges">Explore innovation challenges</a></div><div className="hero-signature" aria-label="Our approach"><span>Rooted in Bhutan</span><span>Human values first</span><span>Built for tomorrow</span></div></section><OurOwnCredit/>{wpuProject.approved && <FeaturedProject/>}<section className="studio-intro" aria-labelledby="studio-title"><p className="eyebrow">A place to imagine, question and build</p><h2 id="studio-title">Bhutanese heritage. Future-facing ideas.</h2><p>Inspired by the proposed MAGIC Lab interiors: Himalayan silhouettes, warm golden light, flowing forms and a spirit of experimentation. These are design inspirations, not photographs of a completed facility.</p><div className="studio-pillars"><span>01 / Governance</span><span>02 / Technology</span><span>03 / Human values</span></div></section><section className="sections" aria-label="Explore MAGIC JusTICe Lab">{panels.map((item, i) => <a className="panel panel-link" href={pages[item.key].path} key={item.key}><span className="index">{String(i + 1).padStart(2, "0")}</span><h2>{item.label}</h2><p>{item.text}</p>{item.key === "ideas" && <p className="notice">Idea submission is not yet enabled. No personal information is being collected.</p>}</a>)}</section></>;
 }
 function Page({ page }: { page: PageKey }) {
   if (page === "home") return <Home/>;
-  const titles: Record<Exclude<PageKey, "home">, string> = {
+  if (page === "wpu") return wpuProject.approved ? <WpuCaseStudy/> : <Page page="projects"/>;
+  const titles: Record<Exclude<PageKey, "home" | "wpu">, string> = {
     purpose: "Our Purpose", labs: "Innovation Labs", projects: "Projects", challenges: "Innovation Challenges",
     ideas: "MAGIC Ideas", insights: "Insights & Events", collaborate: "Collaborate"
   };
@@ -100,7 +130,7 @@ function Page({ page }: { page: PageKey }) {
   return <div className="page"><a href="/" className="back-link">← Back to home</a><p className="eyebrow">MAGIC {wordmark} Lab</p><h1>{title}</h1>
     {page === "purpose" && <><p className="page-lead">Imagine Better Justice. Build It Together.</p><p>MAGIC {wordmark} Lab is an innovation and experimentation initiative within {wordmark} at Jigme Singye Wangchuck School of Law, Bhutan. It creates space to examine ideas at the intersection of law, governance, technology and human values.</p><div className="content-grid"><Card title="Human values first"><p>Innovation begins with the people it affects. Research and experimentation should be accessible, accountable and sensitive to context.</p></Card><Card title="Learn by experimenting"><p>Explore questions, test assumptions and share lessons through appropriately reviewed prototypes and collaborative inquiry.</p></Card><Card title="Responsible technology"><p>AI and digital tools should support sound governance and human judgement, not replace accountability or legal authority.</p></Card></div><p className="notice">MAGIC is an innovation laboratory, not a court, regulator or provider of legal advice.</p></>}
     {page === "labs" && <><ConceptGallery/><LabComputing/><p className="page-lead">Where research, governance and practical experimentation meet.</p><div className="content-grid"><Card title="AI & responsible innovation"><p>Investigate AI capabilities, limitations, evaluation and human oversight in justice-related settings.</p></Card><Card title="Legal technology"><p>Explore accessible information, document workflows and prototype tools with appropriate institutional supervision.</p></Card><Card title="Governance & ethics"><p>Study the rules, values, accountability structures and safeguards needed for trustworthy innovation.</p></Card><Card title="Learning & participation"><p>Create opportunities for students, researchers and collaborators to learn through demonstrations and discussion.</p></Card></div><p className="notice">Lab themes describe areas for exploration; they are not claims that operational legal services are available.</p></>}
-    {page === "projects" && <><p className="page-lead">A transparent view of approved work and experiments.</p><div className="project-status-key" aria-label="Project lifecycle"><span>Concept</span><span>Prototype</span><span>Pilot</span><span>Operational</span></div>{publishedProjects.length ? <div className="content-grid">{publishedProjects.map(project => <Card key={project.slug} title={project.title}><p><strong>Status: {project.status}</strong></p><p>{project.description}</p></Card>)}</div> : <Card title="Project catalogue in preparation"><p>No project entries have yet received publication approval. Projects will appear here with a clearly defined lifecycle status and review process.</p></Card>}</>}
+    {page === "projects" && <><p className="page-lead">A transparent view of approved work and experiments.</p><div className="project-status-key" aria-label="Project lifecycle"><span>Proposed</span><span>Concept</span><span>Prototype</span><span>Pilot</span><span>Operational</span></div>{publishedProjects.length ? <div className="content-grid">{publishedProjects.map(project => <Card key={project.slug} title={project.title}><p><strong>Status: {project.status}</strong></p><p>{project.description}</p>{project === wpuProject && <a href={pages.wpu.path}>Read the WPU case study</a>}</Card>)}</div> : <Card title="Project catalogue in preparation"><p>No project entries have yet received publication approval. Projects will appear here with a clearly defined lifecycle status and review process.</p></Card>}</>}
     {page === "challenges" && <><p className="page-lead">Meaningful problems can become collaborative research opportunities.</p><Card title="Challenge programme in preparation"><p>Potential themes include accessible legal information, multilingual communication and accountable AI governance. No challenge is currently open for public submissions.</p></Card></>}
     {page === "ideas" && <><p className="page-lead">A future space to contribute ideas for better justice.</p><Card title="Submissions not yet open"><p>MAGIC Ideas will launch only after consent, privacy, moderation, review and publication controls have been tested and approved. Do not send confidential or personal case information through this website.</p></Card></>}
     {page === "insights" && <><p className="page-lead">Research, learning and exchange.</p><Card title="Editorial content in preparation"><p>Approved events, workshop summaries, announcements and publications will appear here following institutional review.</p></Card></>}

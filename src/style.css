@@ -151,3 +151,30 @@ nav a[aria-current="page"]{color:#d8b879;text-decoration:underline;text-underlin
     gap: 14px;
   }
 }
+
+.wpu-feature {
+  margin: 40px auto 0;
+  width: min(84%, 1260px);
+  padding: clamp(20px, 4vw, 40px);
+  border: 1px solid #d8b87955;
+  border-radius: 14px;
+  background: #121b31;
+}
+
+.wpu-feature h2 {
+  margin: 8px 0 12px;
+}
+
+.wpu-feature p:not(.eyebrow) {
+  max-width: 60ch;
+  color: #c6d0e8;
+}
+
+.wpu-feature a, .wpu-case-study a {
+  color: #e4c78f;
+  text-underline-offset: 0.2em;
+}
+
+.wpu-case-study .content-card {
+  margin: 24px 0;
+}
