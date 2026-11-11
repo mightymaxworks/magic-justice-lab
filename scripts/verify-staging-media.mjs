@@ -89,6 +89,8 @@ const { chromium } = createRequire(import.meta.url)("playwright");
       await form.getByLabel("What are you working on, and what would you like to improve?").fill("An example for testing the form.");
       await form.getByLabel("Who would this help?").fill("Example participants");
       await form.getByLabel("What have you tried, and what help do you need?").fill("Example review");
+      await form.getByRole("button", { name: "Continue to your details" }).click();
+      await form.getByRole("heading", { name: "About you" }).waitFor();
       await form.getByLabel("Full name").fill("Fictional Contributor");
       await form.getByLabel("Email address").fill("contributor@example.org");
       await form.getByRole("button", { name: "Continue to email verification" }).click();

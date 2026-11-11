@@ -400,16 +400,74 @@ nav a[aria-current="page"]{color:#d8b879;text-decoration:underline;text-underlin
   justify-self: start;
 }
 
-.idea-form .idea-contact {
-  gap: 14px;
-  padding-top: 12px;
+.ideas-layout {
+  display: grid;
+  grid-template-columns: minmax(160px, 1fr) minmax(0, 3fr);
+  gap: clamp(20px, 4vw, 48px);
+  align-items: start;
+  margin-top: 32px;
 }
 
-.idea-contact p {
+.ideas-guide h2 { font-size: 17px; margin: 0 0 16px; }
+.ideas-guide ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.ideas-guide li { display: flex; align-items: center; gap: 9px; color: #c6d0e8; }
+.ideas-guide li[aria-current] { color: #e4c78f; font-weight: 700; }
+.ideas-step-marker {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #d8b87955;
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+.ideas-layout .idea-form {
   margin: 0;
-  color: #c6d0e8;
+  max-width: none;
+  gap: 24px;
+  background: linear-gradient(145deg, #18203a, #10192e);
 }
 
-.idea-contact label {
-  font-weight: 700;
+.ideas-layout .idea-form h2 { margin: 0; }
+.idea-form .idea-fields { gap: 20px; }
+.idea-form .idea-fields[hidden] { display: none; }
+.idea-form .idea-types legend { margin-bottom: 10px; }
+.idea-options, .idea-input-pair { display: grid; gap: 12px; }
+.idea-options { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.idea-input-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+.idea-form label.idea-choice {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-content: start;
+  gap: 8px;
+  padding: 13px;
+  background: #0d152a;
+  border: 1px solid #9ba9ce66;
+  border-radius: 9px;
+  cursor: pointer;
+}
+
+.idea-choice input { grid-area: 1 / 2; accent-color: #e4c78f; }
+.idea-choice svg { grid-area: 1 / 1; color: #e4c78f; }
+.idea-choice span { grid-column: 1 / -1; font-weight: 600; }
+.idea-choice:has(input:checked) { border-color: #e4c78f; background: #242a40; }
+.idea-fields small { color: #aeb9d1; }
+.idea-fields > p, .idea-result p { margin: 0; color: #c6d0e8; }
+.idea-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-end; }
+.idea-actions button { gap: 8px; }
+.idea-actions .idea-back { background: transparent; color: #e4c78f; border: 1px solid #d8b87955; }
+.idea-result > svg { color: #e4c78f; }
+
+@media (max-width: 720px) {
+  .ideas-layout { grid-template-columns: 1fr; gap: 18px; }
+  .ideas-guide ol { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .ideas-guide li { gap: 6px; font-size: 12px; }
+  .ideas-step-marker { width: 24px; height: 24px; }
+  .idea-options, .idea-input-pair { grid-template-columns: 1fr; }
+  .idea-form label.idea-choice { grid-template-columns: auto 1fr auto; align-items: center; }
+  .idea-choice input { grid-area: 1 / 3; }
+  .idea-choice span { grid-area: 1 / 2; }
 }
