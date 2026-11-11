@@ -22,7 +22,7 @@ describe("M3.1 public site release guards", () => {
     expect(css).toContain("@media(max-width:1050px)");
     expect(css).toContain("@media(prefers-reduced-motion:reduce)");
   });
-  it("distinguishes proposed initiatives from operational services", () => {
+  it("does not publish unapproved projects and labels concept imagery", () => {\n    expect(app).toContain("projectEntries.filter(project => project.approved)");\n    expect(app).toContain("No project entries have yet received publication approval");\n    expect(app).toContain("Final facility design and equipment may differ");\n  });\n  it("distinguishes proposed initiatives from operational services", () => {
     expect(app).toContain("not a court, regulator or provider of legal advice");
     expect(app).toContain("No challenge is currently open for public submissions");
   });
