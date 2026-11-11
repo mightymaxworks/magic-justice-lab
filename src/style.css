@@ -31,3 +31,25 @@ nav a[aria-current="page"]{color:#d8b879;text-decoration:underline;text-underlin
 @media(max-width:1050px){header{flex-wrap:wrap}.menu-toggle{display:block;margin-left:auto}nav{display:none;width:100%;flex-direction:column;gap:0;padding-top:12px}nav.nav-open{display:flex}nav a{padding:12px 0;font-size:15px}.content-grid{grid-template-columns:1fr}}
 @media(max-width:600px){.brand{font-size:19px}.hero{padding:72px 7%}.page{padding:55px 7% 80px}.panel{padding:25px;min-height:unset}.sections{gap:12px}}
 @media(prefers-reduced-motion:reduce){.panel-link{transition:none}}
+
+/* M3.2 visual language: inspired by conceptual Bhutan MAGIC Lab interiors */
+.hero{background:radial-gradient(ellipse at 88% 30%,#522c6344,transparent 47%),linear-gradient(145deg,#0a1027,#111532 72%,#19122e);border-bottom:1px solid #d8b87925;min-height:75vh}
+.hero:after{content:"";position:absolute;bottom:0;left:0;right:0;height:4px;background:linear-gradient(90deg,transparent,#d8b879 25%,#9b6fba 65%,transparent);opacity:.8}
+.hero .eyebrow,.hero h1,.hero .intro,.hero-actions,.hero-signature{position:relative;z-index:1}
+.himalayan-art{position:absolute;right:0;bottom:8%;width:min(47%,610px);opacity:.65;pointer-events:none}
+.himalayan-art svg{width:100%;height:auto;filter:drop-shadow(0 0 16px #d8b87944)}
+.hero-actions{display:flex;align-items:center;flex-wrap:wrap;gap:18px}
+.secondary-cta{display:inline-block;margin-top:30px;color:#f0d49e;text-underline-offset:6px;font-weight:600}
+.hero-signature{display:flex;flex-wrap:wrap;gap:12px 25px;margin-top:58px;color:#c4bbd7;font-size:12px;letter-spacing:.06em}
+.hero-signature span:before{content:"✦";color:#d8b879;margin-right:9px}
+.studio-intro{margin:0 auto;padding:90px 8% 48px;max-width:1500px}
+.studio-intro h2{font-size:clamp(32px,4.4vw,58px);line-height:1.14;max-width:900px;letter-spacing:-.035em}
+.studio-intro>p:not(.eyebrow){color:#c6d0e8;font-size:18px;line-height:1.75;max-width:810px}
+.studio-pillars{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.studio-pillars span{border:1px solid #d8b87966;border-radius:100px;padding:10px 18px;color:#ead6b2;font-size:13px}
+.sections{padding-top:2%}
+.panel-link{background:linear-gradient(145deg,#18203e,#111a35);border-color:#d8b87925;position:relative;overflow:hidden}
+.panel-link:before{content:"";position:absolute;left:0;top:0;width:100%;height:2px;background:linear-gradient(90deg,#d8b879,#ad78c2,transparent);opacity:.75}
+.panel-link:hover{box-shadow:0 12px 34px #00000035}
+@media(max-width:850px){.himalayan-art{width:75%;bottom:5%;opacity:.22}.hero{min-height:unset}.studio-intro{padding:64px 7% 25px}.hero-signature{margin-top:38px}}
+@media(prefers-reduced-motion:reduce){.himalayan-art svg{filter:none}}
