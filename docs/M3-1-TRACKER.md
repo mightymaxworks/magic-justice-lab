@@ -1,6 +1,6 @@
 # MAGIC JusTICe Lab — M3.1 engineering tracker
 
-Updated: 2026-11-11. CI run #46 passed for commit 7bb702ac. Cloudflare staging remains unverified from available tools; source commits alone do not prove deployment.
+Updated: 2026-11-11. CI run #46 passed for commit 7bb702ac; subsequent favicon changes require fresh verification. Cloudflare staging remains unverified from available tools; source commits alone do not prove deployment.
 
 | ID | Subtask | Status | Evidence / gate |
 | --- | --- | --- | --- |
@@ -21,7 +21,7 @@ Updated: 2026-11-11. CI run #46 passed for commit 7bb702ac. Cloudflare staging r
 | M3.1-15 | Browser visual regression | Not started | Add screenshots/Playwright when runner is configured |
 | M3.1-16 | Cloudflare Access / security review | Not started | Decide internal preview protection and data policy |
 
-## Release boundaries
+| M3.1-17 | Favicon | Implemented; CI/deployment pending | SVG monogram at public/favicon.svg; linked in index.html; tests/favicon.test.ts; commit e40378b8 |\n\n## Release boundaries
 
 - M3 public pages are informational; no personal data collection.
 - M4 private submissions and M5 approvals are separate future releases.
