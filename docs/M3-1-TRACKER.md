@@ -53,7 +53,7 @@ Do not label concept renders as photographs of a completed lab, and do not publi
 
 This is a code-complete first slice, **not** a verified live release.
 
-## M3.2 image integration — current state
+## M3.2 image integration — historical handover
 
 - [x] Original supplied PNGs retained in the conversation working environment; do not modify originals.
 - [x] Four optimized WebP files prepared under `public/images/` in a local ZIP: `hero-magic-lab.webp`, `gallery-collaboration.webp`, `gallery-heritage.webp`, `gallery-technology.webp`.
@@ -81,5 +81,5 @@ This is a code-complete first slice, **not** a verified live release.
 - [x] Verified binary transfer to GitHub using matching Git blob hashes. Staging takes the derivatives from `media/publish/` and attempts R2 publication after deployment.
 - [x] Publishing commit `a99ada67`: [CI passed](https://github.com/mightymaxworks/magic-justice-lab/actions/runs/43021788038), and [staging published and verified all four R2 images](https://github.com/mightymaxworks/magic-justice-lab/actions/runs/43021788333).
 - [x] Visually reviewed the live homepage hero and Innovation Labs gallery on desktop.
-- [ ] Confirm the automated desktop and mobile browser checks on the staging run.
+- [x] Browser checks passed at 1440px desktop and 390px mobile widths on commit `a95c80bc`. The hero and gallery images decoded and rendered without horizontal overflow. [Staging run](https://github.com/mightymaxworks/magic-justice-lab/actions/runs/43022408488) · [CI](https://github.com/mightymaxworks/magic-justice-lab/actions/runs/43022408520).
 - [ ] Locate the five original PNGs for byte-for-byte preservation checks.
