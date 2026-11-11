@@ -3,11 +3,15 @@ on:
   workflow_dispatch:
   push:
     branches: [develop]
+concurrency:
+  group: magic-justice-lab-staging
+  cancel-in-progress: false
 permissions:
   contents: read
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-24.04
     environment: staging
     steps:
       - uses: actions/checkout@v4
@@ -20,3 +24,14 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Publish and verify approved R2 images
+        run: bash scripts/publish-lab-images.sh media/publish
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PUBLIC_IMAGE_BASE: https://magic-justice-lab.mightymaxworks.workers.dev/images
+      - name: Check hero and gallery at desktop and mobile widths
+        run: |
+          npm install --prefix "$RUNNER_TEMP/media-browser" --no-audit --no-fund playwright@1.56.1
+          "$RUNNER_TEMP/media-browser/node_modules/.bin/playwright" install --with-deps chromium
+          NODE_PATH="$RUNNER_TEMP/media-browser/node_modules" node scripts/verify-staging-media.mjs

@@ -4,16 +4,41 @@ compatibility_date = "2026-10-01"
 [assets]
 directory = "./dist"
 binding = "ASSETS"
-run_worker_first = ["/api/*"]
+run_worker_first = ["/", "/api/*", "/images/*", "/robots.txt", "/sitemap.xml", "/our-purpose", "/innovation-labs", "/projects", "/projects/wpu-living-laboratory", "/innovation-challenges", "/magic-ideas", "/insights-and-events", "/collaborate"]
 [env.staging]
-name = "magic-justice-lab-staging"
+name = "magic-justice-lab"
 [env.staging.assets]
 directory = "./dist"
 binding = "ASSETS"
-run_worker_first = ["/api/*"]
+run_worker_first = ["/", "/api/*", "/images/*", "/robots.txt", "/sitemap.xml", "/our-purpose", "/innovation-labs", "/projects", "/projects/wpu-living-laboratory", "/innovation-challenges", "/magic-ideas", "/insights-and-events", "/collaborate"]
 [env.production]
 name = "magic-justice-lab-production"
 [env.production.assets]
 directory = "./dist"
 binding = "ASSETS"
+run_worker_first = ["/", "/api/*", "/images/*", "/robots.txt", "/sitemap.xml", "/our-purpose", "/innovation-labs", "/projects", "/projects/wpu-living-laboratory", "/innovation-challenges", "/magic-ideas", "/insights-and-events", "/collaborate"]
+
+# Publicly approved image delivery; uploads are not exposed by this Worker.
+[[env.staging.r2_buckets]]
+binding = "LAB_ASSETS"
+bucket_name = "magic-lab-assets"
+
+[[env.production.r2_buckets]]
+binding = "LAB_ASSETS"
+bucket_name = "magic-lab-assets"
+
+[env.ideas-test]
+name = "magic-ideas-local-test"
+
+[env.ideas-test.assets]
+directory = "./dist"
+binding = "ASSETS"
 run_worker_first = ["/api/*"]
+
+[[env.ideas-test.r2_buckets]]
+binding = "LAB_ASSETS"
+bucket_name = "magic-lab-assets"
+
+[[env.ideas-test.r2_buckets]]
+binding = "IDEAS_TEST_QUEUE"
+bucket_name = "magic-ideas-synthetic-test"

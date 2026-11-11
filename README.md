@@ -1,4 +1,4 @@
-# MAGIC Justice Lab
+# MAGIC JusTICe Lab
 
 A responsible innovation laboratory within JusTICe at Jigme Singye Wangchuck School of Law, Bhutan.
 
