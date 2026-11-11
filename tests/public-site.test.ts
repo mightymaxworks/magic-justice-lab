@@ -22,7 +22,14 @@ describe("M3.1 public site release guards", () => {
     expect(css).toContain("@media(max-width:1050px)");
     expect(css).toContain("@media(prefers-reduced-motion:reduce)");
   });
-  it("does not publish unapproved projects and labels concept imagery", () => {\n    expect(app).toContain("projectEntries.filter(project => project.approved)");\n    expect(app).toContain("No project entries have yet received publication approval");\n    expect(app).toContain("Interior renderings will be published here once the supplied image files are optimised");\n  });\n  it("distinguishes proposed initiatives from operational services", () => {
+  it("does not publish unapproved projects and labels concept imagery", () => {
+    expect(app).toContain("projectEntries.filter(project => project.approved)");
+    expect(app).toContain("No project entries have yet received publication approval");
+    expect(app).toContain("Proposed MAGIC JusTICe Lab — artist impressions");
+    expect(app).toContain("/images/gallery-collaboration.webp");
+    expect(app).toContain("/images/hero-magic-lab.webp");
+  });
+  it("distinguishes proposed initiatives from operational services", () => {
     expect(app).toContain("not a court, regulator or provider of legal advice");
     expect(app).toContain("No challenge is currently open for public submissions");
   });
