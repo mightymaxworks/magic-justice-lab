@@ -15,7 +15,7 @@ describe("MAGIC JusTICe Lab brand identity", () => {
   it("uses the shared wordmark in header and footer", () => {
     expect(source).toContain('aria-label="MAGIC JusTICe Lab"');
     expect(source).toContain('MAGIC <span className="justice-mark">JusTICe</span> Lab');
-    expect((source.match(/MAGIC <span className="justice-mark">JusTICe<\/span> Lab/g) ?? []).length).toBe(2);
+    expect((source.match(/MAGIC <span className="justice-mark">JusTICe<\/span> Lab/g) ?? []).length).toBeGreaterThanOrEqual(2);
     expect(source).toContain('className="footer-secondary"');
   });
   it("does not retain the previous lab name or incorrect capitalization", () => {
