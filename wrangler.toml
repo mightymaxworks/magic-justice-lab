@@ -17,3 +17,12 @@ name = "magic-justice-lab-production"
 directory = "./dist"
 binding = "ASSETS"
 run_worker_first = ["/api/*"]
+
+# Publicly approved image delivery; uploads are not exposed by this Worker.
+[[env.staging.r2_buckets]]
+binding = "LAB_ASSETS"
+bucket_name = "magic-lab-assets"
+
+[[env.production.r2_buckets]]
+binding = "LAB_ASSETS"
+bucket_name = "magic-lab-assets"
