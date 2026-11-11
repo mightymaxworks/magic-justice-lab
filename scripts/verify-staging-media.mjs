@@ -64,7 +64,15 @@ const { chromium } = createRequire(import.meta.url)("playwright");
       await page.goto(staging + "/projects");
       await page.locator("main .wpu-image").scrollIntoViewIfNeeded();
       await page.locator("main .wpu-image").evaluate(img => img.decode());
-      await page.getByRole("link", { name: "Read the WPU case study" }).click();
+      const projectLink = page.getByRole("link", { name: /View case study.*WPU Living Laboratory/ });
+      await projectLink.locator(".project-card-action").waitFor({ state: "visible" });
+      if (viewport.width === 1440) {
+        await projectLink.focus();
+        assert.ok(await projectLink.evaluate(link => link.matches(":focus-visible")));
+        await projectLink.press("Enter");
+      } else {
+        await projectLink.locator("img").tap();
+      }
       await page.locator(".wpu-hero img").evaluate(img => img.decode());
       assert.equal(await page.locator(".appeal-steps li").count(), 3);
       await page.getByRole("heading", { name: "AI Governance in Practice: The WPU Living Laboratory" }).waitFor();
