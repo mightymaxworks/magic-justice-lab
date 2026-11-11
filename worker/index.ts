@@ -1,3 +1,5 @@
+import { pageForPath, pages } from "../src/pages";
+
 export interface Env { ASSETS: Fetcher; LAB_ASSETS: R2Bucket }
 
 const approvedImages = new Set([
@@ -32,6 +34,36 @@ export default {
     if (url.pathname.startsWith("/api/")) {
       return Response.json({ error: "Not found" }, { status: 404, headers: { "Cache-Control": "no-store" } });
     }
-    return env.ASSETS.fetch(request);
+    if (url.pathname === "/robots.txt") {
+      return new Response(`User-agent: *\nAllow: /\nSitemap: ${url.origin}/sitemap.xml\n`, {
+        headers: { "Content-Type": "text/plain; charset=utf-8" },
+      });
+    }
+    if (url.pathname === "/sitemap.xml") {
+      const links = [pages.home, pages.purpose, pages.labs].map(page =>
+        `<url><loc>${url.origin}${page.path}</loc></url>`
+      );
+      return new Response(`<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${links.join("")}</urlset>`, {
+        headers: { "Content-Type": "application/xml; charset=utf-8" },
+      });
+    }
+    const pageKey = pageForPath(url.pathname);
+    if (!pageKey || (request.method !== "GET" && request.method !== "HEAD")) {
+      return env.ASSETS.fetch(request);
+    }
+
+    const page = pages[pageKey];
+    const canonical = url.origin + page.path;
+    const image = url.origin + "/images/hero-magic-lab.webp";
+    const html = await env.ASSETS.fetch(new Request(new URL("/", url), request));
+    return new HTMLRewriter()
+      .on("title", { element: el => el.setInnerContent(page.title) })
+      .on('link[rel="canonical"]', { element: el => el.setAttribute("href", canonical) })
+      .on('meta[name="description"]', { element: el => el.setAttribute("content", page.description) })
+      .on('meta[property="og:description"]', { element: el => el.setAttribute("content", page.description) })
+      .on('meta[property="og:title"]', { element: el => el.setAttribute("content", page.title) })
+      .on('meta[property="og:url"]', { element: el => el.setAttribute("content", canonical) })
+      .on('meta[property="og:image"]', { element: el => el.setAttribute("content", image) })
+      .transform(html);
   },
 } satisfies ExportedHandler<Env>;
