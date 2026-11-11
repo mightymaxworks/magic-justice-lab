@@ -4,6 +4,8 @@ import { createRequire } from "node:module";
 const staging = "https://magic-justice-lab.mightymaxworks.workers.dev";
 
 async function verifyShareMetadata() {
+  const queue = await fetch(staging + "/api/ideas/test-queue");
+  assert.equal(queue.status, 404);
   for (const [path, title] of [
     ["/", "MAGIC JusTICe Lab | Imagine Better Justice"],
     ["/innovation-labs", "Innovation Labs | MAGIC JusTICe Lab"],

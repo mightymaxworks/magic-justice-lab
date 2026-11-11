@@ -1,6 +1,8 @@
 import { pageForPath, pages, wpuImage } from "../src/pages";
 
-export interface Env { ASSETS: Fetcher; LAB_ASSETS: R2Bucket }
+import { handleIdeasQueue, type IdeasQueueEnv } from "./ideas-queue";
+
+export interface Env extends IdeasQueueEnv { ASSETS: Fetcher; LAB_ASSETS: R2Bucket }
 
 const approvedImages = new Set([
   "hero-magic-lab.webp",
@@ -30,6 +32,9 @@ export default {
       });
       if (object.httpEtag) headers.set("ETag", object.httpEtag);
       return new Response(request.method === "HEAD" ? null : object.body, { headers });
+    }
+    if (url.pathname === "/api/ideas/test-queue" || url.pathname.startsWith("/api/ideas/test-queue/")) {
+      return handleIdeasQueue(request, env);
     }
     if (url.pathname.startsWith("/api/")) {
       return Response.json({ error: "Not found" }, { status: 404, headers: { "Cache-Control": "no-store" } });
