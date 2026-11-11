@@ -63,3 +63,12 @@ This is a code-complete first slice, **not** a verified live release.
 - [ ] Confirm CI and staging deployment after binary upload; inspect image URLs and mobile/desktop presentation.
 
 **Do not mark image publication complete until all four URLs return real image content.**
+
+## M3.2 R2 publishing infrastructure — November 11, 2026
+- [x] User reports Cloudflare R2 bucket `magic-lab-assets` created (not independently verified).
+- [x] Configure staging and production `LAB_ASSETS` R2 bindings in `wrangler.toml`.
+- [x] Add GET/HEAD-only, explicit filename allowlist for `/images/*.webp` backed by `published/magic-justice-lab/` keys.
+- [x] Prevent unauthorised public upload endpoints.
+- [ ] Verify Wrangler deploy and R2 binding against actual Cloudflare account.
+- [ ] Establish restricted server-to-R2 upload integration with verifiable ChatGPT attachment transfer; no broad API token in chat.
+- [ ] Publish four WebP assets and check actual 200 responses, Content-Type and desktop/mobile layouts.
