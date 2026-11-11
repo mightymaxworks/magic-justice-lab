@@ -102,7 +102,7 @@ This is a code-complete first slice, **not** a verified live release.
 | MI-01 Entry points | Implemented | Projects and Collaborate link to MAGIC Ideas. The WPU case study carries its context into the form. |
 | MI-02 Form and confirmation | Implemented as browser-only practice | Three starting points, conditional project question, required name and email, optional role and organisation, and simulated email verification. Verify on desktop and mobile. |
 | MI-03 Assign review ownership | Platform admin assigned | Platform admin owns the queue. Use a mock sender for synthetic testing. Confirm the institutional sender before public intake. |
-| MI-04 Private queue and reviewer access | Synthetic queue implemented | Local admin API can create, list and update fictional submissions. Provision private live storage and platform-admin sign-in before launch. |
+| MI-04 Private queue and reviewer access | Synthetic queue implemented | Local reviewer screen and API can create, verify, list and update fictional submissions. Provision private live storage and platform-admin sign-in before launch. |
 | MI-05 Live submission and receipt | Open | Verify control of the contributor email before queueing for review. Add server-side validation, Turnstile, request limits, a reference, error recovery and a clear receipt. |
 | MI-06 Privacy and launch review | Open | Agree who can see submissions, retention and deletion, and the public privacy wording. Test with fictional data before enabling real intake. |
 | MI-07 Challenge intake | Waiting for a challenge | Add a link that identifies the approved challenge when one opens. |
@@ -121,3 +121,5 @@ Use the `ideas-test` Wrangler environment locally. Set a random token of at leas
 | `PUT /api/ideas/test-queue/<id>/status?value=shortlisted` | Updates the review status. Include the current version in `If-Match`. |
 
 The test bucket is local and separate from site imagery. The fixture simulates a confirmed email, with no outbound delivery. The public staging and production environments have no test-queue binding.
+
+Open `http://127.0.0.1:8787/api/ideas/test-queue/reviewer` to walk through the local reviewer experience with the test token. Create a fictional submission, simulate email verification, then change its status. The queue only lists verified entries. CI exercises the same sequence against Wrangler’s local R2, including invalid and reused verification values. The local reviewer token is for synthetic testing. The live reviewer still needs account-based sign-in.

@@ -19,3 +19,5 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
+      - name: Verify synthetic MAGIC Ideas intake with local R2
+        run: bash scripts/verify-ideas-queue.sh
