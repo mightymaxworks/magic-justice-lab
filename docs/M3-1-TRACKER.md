@@ -79,6 +79,7 @@ This is a code-complete first slice, **not** a verified live release.
 - [x] Audited develop at `b4879872`: CI and staging deployment succeeded. The live health endpoint returned 200 and the four approved routes reported missing R2 objects.
 - [x] Recovered four WebP derivatives from the prepared archive. All four decoded successfully at 1500 × 844. The five original PNGs were absent from the archive and were not modified.
 - [x] Verified binary transfer to GitHub using matching Git blob hashes. Staging takes the derivatives from `media/publish/` and attempts R2 publication after deployment.
-- [ ] Record fresh CI, staging and live R2 byte verification for the publishing commit.
-- [ ] Review the live hero and gallery at desktop and mobile widths.
+- [x] Publishing commit `a99ada67`: [CI passed](https://github.com/mightymaxworks/magic-justice-lab/actions/runs/43021788038), and [staging published and verified all four R2 images](https://github.com/mightymaxworks/magic-justice-lab/actions/runs/43021788333).
+- [x] Visually reviewed the live homepage hero and Innovation Labs gallery on desktop.
+- [ ] Confirm the automated desktop and mobile browser checks on the staging run.
 - [ ] Locate the five original PNGs for byte-for-byte preservation checks.
