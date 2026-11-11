@@ -39,3 +39,16 @@ Updated: 2026-11-11. CI run #46 passed for commit 7bb702ac; subsequent favicon c
 - [ ] Populate real project and event content following institutional review.
 
 Do not label concept renders as photographs of a completed lab, and do not publish an unverified node count or service status shown in the concepts.
+
+## M3.2 implementation update — gallery and catalogue
+
+- [x] Conceptual Innovation Labs gallery using lightweight SVG/CSS visual motifs inspired by the five supplied artist impressions.
+- [x] Project lifecycle schema: Concept, Prototype, Pilot, Operational.
+- [x] Publication gate: only `approved: true` projects are displayed; illustrative research themes are not published as actual projects.
+- [x] Automated source-level tests for gallery disclaimer and approval gate.
+- [ ] Confirm latest CI/build and staging deployment.
+- [ ] Upload actual artist-impression PNGs in optimized form and label as proposed-facility renderings.
+- [ ] Review on real desktop/mobile browser and obtain institutional approval for gallery and text.
+- [ ] Add editorial workflow and real project metadata (owner, review date, safeguards, outcomes).
+
+This is a code-complete first slice, **not** a verified live release.
