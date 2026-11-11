@@ -72,3 +72,13 @@ This is a code-complete first slice, **not** a verified live release.
 - [ ] Verify Wrangler deploy and R2 binding against actual Cloudflare account.
 - [ ] Establish restricted server-to-R2 upload integration with verifiable ChatGPT attachment transfer; no broad API token in chat.
 - [ ] Publish four WebP assets and check actual 200 responses, Content-Type and desktop/mobile layouts.
+
+
+## M3.2 automatic media release — November 11, 2026
+
+- [x] Audited develop at `b4879872`: CI and staging deployment succeeded. The live health endpoint returned 200 and the four approved routes reported missing R2 objects.
+- [x] Recovered four WebP derivatives from the prepared archive. All four decoded successfully at 1500 × 844. The five original PNGs were absent from the archive and were not modified.
+- [x] Verified binary transfer to GitHub using matching Git blob hashes. Staging takes the derivatives from `media/publish/` and attempts R2 publication after deployment.
+- [ ] Record fresh CI, staging and live R2 byte verification for the publishing commit.
+- [ ] Review the live hero and gallery at desktop and mobile widths.
+- [ ] Locate the five original PNGs for byte-for-byte preservation checks.

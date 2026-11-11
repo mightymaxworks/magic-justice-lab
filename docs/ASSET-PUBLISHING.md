@@ -1,14 +1,15 @@
 # MAGIC JusTICe Lab media publishing
 
 ## Status
-Cloudflare R2 bucket `magic-lab-assets` and Worker binding `LAB_ASSETS` confirmed in dashboard by the project owner. Website image routes and allowlist have been implemented. **Binary image upload is not yet complete**.
+Staging deployment runs the R2 publisher after deploying the Worker. See the
+GitHub Actions run for the deployed commit and the milestone tracker for live verification.
 
 ## Asset policy
 - Keep the five supplied PNG artist impressions unchanged as masters, outside the public bucket.
 - Publish only approved, optimized WebP derivatives.
 - Public delivery is GET/HEAD-only via `/images/<approved filename>`.
 - R2 keys are under `published/magic-justice-lab/`.
-- No public upload API, no shared account-wide credentials, no secrets in GitHub.
+- No public upload API, no shared account-wide credentials, no credentials in repository files.
 
 ## Current four approved paths
 - `hero-magic-lab.webp`
@@ -16,15 +17,29 @@ Cloudflare R2 bucket `magic-lab-assets` and Worker binding `LAB_ASSETS` confirme
 - `gallery-heritage.webp`
 - `gallery-technology.webp`
 
-## Operator publishing procedure (temporary fallback)
-The prepared ZIP contains `public/images/<filename>` for all four. From an authenticated deployment environment, unzip into the repository and run `bash scripts/publish-lab-images.sh`. This requires authenticated Wrangler and access to the four binary files. The script checks file presence, WebP MIME type and a 2 MB per-file limit before uploading to R2. This is a fallback, **not yet ChatGPT autonomous binary transfer**.
+## Publish from ChatGPT through GitHub Actions
 
-## Long-term transfer integration
-Build a restricted media-publishing service with:
-1. Cloudflare Access-protected ingestion (verify JWT issuer, audience, signature, expiry).
-2. Short-lived upload intent, strict image allowlist, content verification, maximum size and integrity hash.
-3. Private original storage, explicit approval before public derivative publication.
-4. Audit logs, revocation, deduplication and rollback.
-5. An actual supported ChatGPT-connected binary transfer mechanism; validate end-to-end before declaring autonomous upload.
+1. Make the approved WebPs available to ChatGPT. Keep the source PNGs private.
+2. Validate the four derivatives and place them in `media/publish/` using Git
+   binary blobs. Verify each returned blob SHA matches the local Git object hash.
+3. Push the commit to `develop`. Deploy staging uses the existing staging
+   environment secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+   The token needs permission to write objects to R2. Keep it in GitHub Actions
+   secrets. If a run fails, rerun Deploy staging from `develop` after fixing it.
+4. Check the publish step. It requires HTTP 200, `image/webp`, and a byte-for-byte
+   match for every public URL. Review the hero and gallery at desktop and mobile widths.
 
-Do not publish credentials in chat or source. Do not claim the images are live until all four URLs return HTTP 200 and `image/webp` and have been reviewed in a browser.
+The workflow serializes staging deployments and publishing. The publisher skips
+identical images, stops if a public object differs and uploads only when the
+Worker confirms the approved key is missing. Publish revisions under new names
+and update the Worker allowlist and site references together.
+
+## Reuse for OurOwn projects
+
+Copy the publishing script and staging workflow step. Set `R2_BUCKET`,
+`R2_PREFIX` and `PUBLIC_IMAGE_BASE` for the project and pass the approved WebP
+filenames after the input directory. The public route must return
+`404 Image not yet published` for a missing allowlisted object, and serve
+the exact R2 bytes with `Content-Type: image/webp` when present. Configure a
+project-specific Actions environment and Cloudflare credential with only the
+required permissions. Keep the input directory outside the website build.

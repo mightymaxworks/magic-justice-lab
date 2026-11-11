@@ -3,10 +3,14 @@ on:
   workflow_dispatch:
   push:
     branches: [develop]
+concurrency:
+  group: magic-justice-lab-staging
+  cancel-in-progress: false
 permissions:
   contents: read
 jobs:
   deploy:
+    if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     environment: staging
     steps:
@@ -20,3 +24,9 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      - name: Publish and verify approved R2 images
+        run: bash scripts/publish-lab-images.sh media/publish
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PUBLIC_IMAGE_BASE: https://magic-justice-lab.mightymaxworks.workers.dev/images
