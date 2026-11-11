@@ -83,3 +83,8 @@ This is a code-complete first slice, **not** a verified live release.
 - [x] Visually reviewed the live homepage hero and Innovation Labs gallery on desktop.
 - [x] Browser checks passed at 1440px desktop and 390px mobile widths on commit `a95c80bc`. The hero and gallery images decoded and rendered without horizontal overflow. [Staging run](https://github.com/mightymaxworks/magic-justice-lab/actions/runs/43022408488) · [CI](https://github.com/mightymaxworks/magic-justice-lab/actions/runs/43022408520).
 - [ ] Locate the five original PNGs for byte-for-byte preservation checks.
+
+## OurOwn attribution
+
+- [x] Add homepage, Innovation Labs and footer attribution for OurOwn as the Lab’s computing platform and a proprietary platform of Metazone Digital.
+- [x] Check the placement, link and layout at desktop and mobile widths in the staging browser workflow.

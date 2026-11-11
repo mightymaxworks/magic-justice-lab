@@ -74,7 +74,7 @@ function OurOwnCredit() {
           </div>
         </div>
         <p>OurOwn provides the computing foundation for AI and technology experimentation at MAGIC JusTICe Lab.</p>
-        <a href={ourOwnUrl}>Explore OurOwn <span aria-hidden="true">↗</span></a>
+        <a href={ourOwnUrl}>Explore OurOwn</a>
       </div>
     </section>
   );
