@@ -53,3 +53,26 @@ nav a[aria-current="page"]{color:#d8b879;text-decoration:underline;text-underlin
 .panel-link:hover{box-shadow:0 12px 34px #00000035}
 @media(max-width:850px){.himalayan-art{width:75%;bottom:5%;opacity:.22}.hero{min-height:unset}.studio-intro{padding:64px 7% 25px}.hero-signature{margin-top:38px}}
 @media(prefers-reduced-motion:reduce){.himalayan-art svg{filter:none}}
+
+/* M3.2: conceptual lab gallery, designed without claiming renderings are built facilities */
+.concept-gallery{margin:32px 0 48px}
+.gallery-heading{max-width:850px}
+.gallery-heading h2{font-size:clamp(26px,3.2vw,43px)}
+.gallery-heading>p:not(.eyebrow){color:#c6d0e8;line-height:1.7}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:28px}
+.gallery-tile{background:#121c39;border:1px solid #d8b87935;border-radius:14px;overflow:hidden}
+.gallery-tile h3{font-size:19px;margin:22px 22px 8px}
+.gallery-tile p{font-size:14px;color:#c6d0e8;line-height:1.6;margin:0 22px 24px}
+.gallery-art{height:180px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.gallery-art-one{background:radial-gradient(circle at 75% 20%,#4b2c67,#101830 65%)}
+.gallery-art-one svg{width:90%;filter:drop-shadow(0 0 12px #d8b87966)}
+.gallery-art-two{background:linear-gradient(145deg,#2d183e,#50305b 60%,#111a35)}
+.gallery-orbit{width:230px;height:90px;border:5px solid #d8b879;border-radius:50%;transform:rotate(-25deg);box-shadow:0 0 22px #d8b87977,inset 0 0 18px #d8b87944}
+.gallery-orbit.second{position:absolute;transform:rotate(28deg);border-color:#c68bd6;box-shadow:0 0 22px #c68bd688}
+.gallery-art-three{background:radial-gradient(circle,#29345f,#10172f 70%)}
+.gallery-node-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;transform:perspective(260px) rotateX(18deg)}
+.gallery-node-grid span{width:30px;height:22px;border:1px solid #e4bd7d;background:#bfc9db;border-radius:5px;box-shadow:0 0 16px #d8b87977}
+.gallery-disclaimer{font-size:12px!important;color:#aeb9d1!important;margin-top:18px}
+.project-status-key{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0}
+.project-status-key span{font-size:12px;padding:8px 12px;border:1px solid #d8b87966;border-radius:20px;color:#dfc79e}
+@media(max-width:850px){.gallery-grid{grid-template-columns:1fr}.gallery-art{height:200px}}
